@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Events - Drone and Robotics Club</title>
+  <link rel="stylesheet" href="futuristic.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="nav-title">Drone and Robotics Club</div>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="projects.html">Projects</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- EVENTS SECTION -->
+  <div class="section">
+
+    <h2 class="section-title">Our Events</h2>
+
+    <div class="ad-grid">
+
+      <!-- EVENT 1 -->
+      <div class="ad-card">
+        <img src="image/workshop1.jpg" alt="Line Following Robot Workshop" class="event-img">
+
+        <h3>Line Following Robot Workshop</h3>
+        <p>Date: 27 December 2025</p>
+
+        <p>
+          Our first workshop on Line Following Robot where students learned
+          robotics basics, sensors and hands-on robot building.
+        </p>
+      </div>
+
+
+      <!-- FUTURE EVENTS (example placeholders) -->
+      <div class="ad-card">
+        <div class="ad-icon">🔧</div>
+        <h3>Robotics Bootcamp</h3>
+        <p>Coming Soon</p>
+        <p>
+          Hands-on training on Arduino, sensors and robotics projects.
+        </p>
+      </div>
+
+      <div class="ad-card">
+        <div class="ad-icon">🚁</div>
+        <h3>Drone Workshop</h3>
+        <p>Coming Soon</p>
+        <p>
+          Introduction to drone components, flight control and safety.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Drone and Robotics Club</h3>
+      <p>Innovation | Robotics | Drone Technology</p>
+
+      <p class="college">
+        College: Sagar Institute of Science Technology & Engineering / Research<br>
+        Bhopal, Madhya Pradesh, India
+      </p>
+
+      <p>© 2026 Drone and Robotics Club. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+
+  <audio id="clickSound" src="click.mp3"></audio>
+
+  <script>
+    const sound = document.getElementById("clickSound");
+
+    document.querySelectorAll("a, button, .menu-icon").forEach(item => {
+      item.addEventListener("click", () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
+    });
+  </script>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery - Drone and Robotics Club</title>
+  <link rel="stylesheet" href="futuristic.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-title">
+    <img src="logo.png" class="logo">
+    <span>Drone and Robotics Club</span>
+  </div>
+    <!-- 3 line menu -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <!-- menu links -->
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="projects.html">Projects</a>
+      <a href="events.html">Events</a>
+
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <h2 class="section-title">Gallery</h2>
+
+  <div class="gallery-grid">
+    <div class="gallery-card">
+      <img src="gallery1.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery2.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery3.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery4.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery5.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery6.jpg" onclick="openImage(this)">
+    </div>
+    
+    <div class="gallery-card">
+      <img src="gallery7.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery8.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery9.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery10.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery11.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery12.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery13.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery14.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery15.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery16.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery17.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery18.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery19.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery20.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery21.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery22.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery23.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery24.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery25.jpg" onclick="openImage(this)">
+    </div>
+
+    <div class="gallery-card">
+      <img src="gallery26.jpg" onclick="openImage(this)">
+    </div>
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+<!-- FULL SCREEN IMAGE VIEWER -->
+<div id="imageViewer" onclick="closeImage()">
+  <img id="viewerImg">
+</div>
+
+
+
+<!-- SCRIPT -->
+<script>
+function openImage(img){
+  document.getElementById("viewerImg").src = img.src;
+  document.getElementById("imageViewer").style.display = "flex";
+}
+
+function closeImage(){
+  document.getElementById("imageViewer").style.display = "none";
+}
+</script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Drone and Robotics Club</h3>
+      <p>Innovation | Robotics | Drone Technology</p>
+
+      <p class="college">
+        College: Sagar Institute of Science Technology & Engineering/ Research<br>
+        Bhopal, Madhya Pradesh, India
+      </p>
+
+      <div class="social-links">
+        <a href="#" title="Instagram">📸 Instagram</a>
+        <a href="#" title="YouTube">▶️ YouTube</a>
+        <a href="#" title="LinkedIn">💼 LinkedIn</a>
+      </div>
+
+      <p class="copyright">
+        © 2026 Drone and Robotics Club. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <audio id="clickSound" src="click.mp3"></audio>
+
+  <script>
+    const sound = document.getElementById("clickSound");
+
+    document.querySelectorAll("a, button, .menu-icon").forEach(item => {
+      item.addEventListener("click", () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
+    });
+  </script>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
