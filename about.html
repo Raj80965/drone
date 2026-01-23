@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - Drone and Robotics Club</title>
+  <link rel="stylesheet" href="futuristic.css">
+
+</head>
+<body>
+
+  <!-- NAVBAR (same as home) -->
+  <div class="navbar">
+    <div class="nav-title">
+      <img src="logo.png" alt="Club Logo" class="logo">
+      <span>Drone and Robotics Club</span>
+    </div>
+
+      <!-- 3 line menu -->
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+      <!-- menu links -->
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="projects.html">Projects</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- ABOUT CONTENT -->
+  <div class="about">
+    <h1>About Us</h1>
+
+    <p>
+      Drone and Robotics Club is a technical student club focused on
+      robotics, drones, and modern technologies. The club provides
+      hands-on learning opportunities to students.
+    </p>
+
+    <h2>Why This Club Was Formed</h2>
+    <p>
+      This club was formed to help students gain practical knowledge
+      beyond classroom learning and to encourage innovation and teamwork.
+    </p>
+
+    <h2>Mission</h2>
+    <p>
+      To develop practical skills in robotics, drones, and automation
+      through hands-on projects and activities.
+    </p>
+
+    <h2>Vision</h2>
+    <p>
+      To create future-ready engineers through innovation, creativity,
+      and real-world problem solving.
+    </p>
+
+    <h2>Activities</h2>
+    <ul>
+      <li>Drone building and flying</li>
+      <li>Robotics projects</li>
+      <li>IoT and automation</li>
+      <li>Workshops and competitions</li>
+    </ul>
+  </div>
+
+
+
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Drone and Robotics Club</h3>
+      <p>Innovation | Robotics | Drone Technology</p>
+
+      <p class="college">
+        College: Sagar Institute of Science Technology & Engineering/ Research<br>
+        Bhopal, Madhya Pradesh, India
+      </p>
+
+      <div class="social-links">
+        <a href="#" title="Instagram">📸 Instagram</a>
+        <a href="#" title="YouTube">▶️ YouTube</a>
+        <a href="#" title="LinkedIn">💼 LinkedIn</a>
+      </div>
+
+      <p class="copyright">
+        © 2026 Drone and Robotics Club. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+
+  <audio id="clickSound" src="click.mp3"></audio>
+
+  <script>
+    const sound = document.getElementById("clickSound");
+
+    document.querySelectorAll("a, button, .menu-icon").forEach(item => {
+      item.addEventListener("click", () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
+    });
+  </script>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
