@@ -26,6 +26,8 @@
 
     <a href="gallery.html">Gallery</a>
     <a href="contact.html">Contact</a>
+      <a href="guests.html">Guest Speakers</a>
+
   </div>
 </div>
 
@@ -42,6 +44,10 @@
   <form class="contact-form" onsubmit="sendWhatsApp(); return false;">
     <input type="text" id="name" placeholder="Your Name" required>
     <input type="email" id="email" placeholder="Your Email" required>
+    <input type="text" id="enrollment" placeholder="Enrollment No." required>
+    <input type="tel" id="contact" placeholder="Contact Number" required>
+
+
     <input type="text" id="subject" placeholder="Subject">
     <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
 
@@ -71,9 +77,10 @@
       <span>droneroboticsclub@gmail.com</span>
     </a>
 
-    <a href="tel:+919244106261" class="channel call">
+    <a href="tel:+917489391648" class="channel call">
+      
       📞 Call Us
-      <span>+91 92441 06261</span>
+      <span>+91 7489391648</span>
     </a>
 
     </div>
@@ -97,6 +104,19 @@
   </div>
 </div>
 
+  <!-- FUNDING & SUPPORT PARTNERS -->
+  <div class="funding">
+    <h2>🤝 Our Funding & Support Partners</h2>
+
+    <div class="funding-logos">
+      <img src="image/team-photo/iste.png" alt="ISTE">
+      <img src="image/team-photo/iic.png" alt="Institution Innovation Council">
+      <img src="image/team-photo/sistec.png" alt="SISTec College">
+       <img src="logo.png" alt="Drone and Robotics Club">
+    </div>
+  </div>
+
+  
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
@@ -135,7 +155,7 @@ function sendWhatsApp(){
     "*Subject:* " + subject + "%0A%0A" +
     "*Message:*%0A" + message;
 
-  let phone = "919244106261"; // ← APNA NUMBER DALO
+  let phone = "917489391648"; // ← APNA NUMBER DALO
   let url = "https://wa.me/" + phone + "?text=" + text;
 
   window.open(url, "_blank");

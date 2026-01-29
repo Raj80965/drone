@@ -26,148 +26,107 @@
 
     <a href="gallery.html">Gallery</a>
     <a href="contact.html">Contact</a>
+      <a href="guests.html">Guest Speakers</a>
+
   </div>
 </div>
 
-<!-- GALLERY -->
-<div class="gallery">
-  <h2 class="section-title">Gallery</h2>
 
-  <div class="gallery-grid">
-    <div class="gallery-card">
-      <img src="gallery1.jpg" onclick="openImage(this)">
+
+
+  <!-- EVENT GALLERY -->
+  <div class="gallery">
+    <h2 class="section-title">📸 Event Gallery</h2>
+
+    <div class="event-folders">
+
+      <!-- LINE FOLLOWING WORKSHOP -->
+      <div class="event-card">
+      
+        
+        <h3>Line Following Workshop</h3>
+        
+        <p class="event-date">📅 27 December 2025</p>
+
+        <button class="event-btn"
+          onclick="openEvent('line-following-workshop')">
+          📂 View Photos
+        </button>
+      </div>
+      <!-- CLUB INAUGURATION -->
+      <div class="event-card">
+        <h3>Club Inauguration</h3>
+        <p class="event-date">📅 27 December 2025</p>
+
+
+        <button class="event-btn"
+          onclick="openEvent('club-inauguration')">
+          📸 View Photos
+        </button>
+      </div>
+
+      <!-- OTHER COLLEGE OLD VIDEOS -->
+      <div class="event-card">
+        <h3>Other College Old Videos</h3>
+        <p class="event-date">🎬 Previous College Events</p>
+
+        <button class="event-btn" onclick="openOldVideos()">
+          📁 View Videos
+        </button>
+      </div>
+
+      <!-- IIT KHARAGPUR -->
+      <div class="event-card">
+        <h3>IIT Kharagpur – Kshitij</h3>
+        <p class="event-date">📅 16-18 January 2026</p>
+
+        <button class="event-btn"
+          onclick="openEvent('iit-kharagpur')">
+          📂 View Photos
+        </button>
+      </div>
+
+      <!-- IIT KANPUR -->
+      <div class="event-card">
+        <h3>IIT Kanpur Visit</h3>
+        <p class="event-date">📅 Academic / Industrial Visit</p>
+
+        <button class="event-btn"
+          onclick="openEvent('iit-kanpur')">
+          📂 View Photos
+        </button>
+      </div>
+
+      <!-- IIT BOMBAY -->
+      <div class="event-card">
+        <h3>IIT Bombay Visit</h3>
+        <p class="event-date">📅 Academic / Industrial Visit</p>
+
+        <button class="event-btn"
+          onclick="openEvent('iit-bombay')">
+          📂 View Photos
+        </button>
+      </div>
+
+
+
+
     </div>
-
-    <div class="gallery-card">
-      <img src="gallery2.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery3.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery4.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery5.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery6.jpg" onclick="openImage(this)">
-    </div>
-    
-    <div class="gallery-card">
-      <img src="gallery7.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery8.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery9.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery10.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery11.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery12.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery13.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery14.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery15.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery16.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery17.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery18.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery19.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery20.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery21.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery22.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery23.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery24.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery25.jpg" onclick="openImage(this)">
-    </div>
-
-    <div class="gallery-card">
-      <img src="gallery26.jpg" onclick="openImage(this)">
-    </div>
-
-
-
-
-
-
-
-
-    
   </div>
-</div>
 
-<!-- FULL SCREEN IMAGE VIEWER -->
-<div id="imageViewer" onclick="closeImage()">
-  <img id="viewerImg">
-</div>
+  <!-- FUNDING & SUPPORT PARTNERS -->
+  <div class="funding">
+    <h2>🤝 Our Funding & Support Partners</h2>
 
+    <div class="funding-logos">
+      <img src="image/team-photo/iste.png" alt="ISTE">
+      <img src="image/team-photo/iic.png" alt="Institution Innovation Council">
+      <img src="image/team-photo/sistec.png" alt="SISTec College">
+       <img src="logo.png" alt="Drone and Robotics Club">
+    </div>
+  </div>
 
-
-<!-- SCRIPT -->
-<script>
-function openImage(img){
-  document.getElementById("viewerImg").src = img.src;
-  document.getElementById("imageViewer").style.display = "flex";
-}
-
-function closeImage(){
-  document.getElementById("imageViewer").style.display = "none";
-}
-</script>
-
+  
   <footer class="footer">
     <div class="footer-content">
       <h3>Drone and Robotics Club</h3>
@@ -206,5 +165,18 @@ function closeImage(){
 
 
   <script src="script.js"></script>
+  <script>
+  function openEvent(eventName){
+    window.location.href = "event-gallery.html?event=" + eventName;
+  }
+  </script>
+
+  <script>
+  function openOldVideos(){
+    window.location.href = "old-video-gallery.html";
+  }
+  </script>
+
+
 </body>
 </html>
