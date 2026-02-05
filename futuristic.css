@@ -1152,27 +1152,37 @@ body {
   margin-bottom: 25px;
   font-size: 28px;
 }
-
-.funding-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  flex-wrap: wrap;
+.funding-logos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:40px;
+  flex-wrap:wrap;
 }
 
-.funding-logos img {
-  height: 80px;
-  background: white;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 231, 0.4);
-  transition: transform 0.3s ease;
+.funding-logos img{
+  max-height:90px;
+  width:auto;
+  background:transparent;
+  padding:0;
+  border-radius:0;
+
+  /* 🔥 better visibility */
+  filter:
+    brightness(1.15)
+    contrast(1.1)
+    drop-shadow(0 0 14px rgba(0,255,231,0.45));
+
+  transition:transform 0.3s ease, filter 0.3s ease;
 }
 
-.funding-logos img:hover {
-  transform: scale(1.1);
+.funding-logos img:hover{
+  transform:scale(1.08);
+  filter:
+    brightness(1.25)
+    drop-shadow(0 0 24px rgba(0,255,231,0.8));
 }
+
 
 .college-details {
   text-align: center;
@@ -1806,7 +1816,6 @@ body {
 body{
   overflow-x: hidden;
 }
-
 #introOverlay{
   position:fixed;
   inset:0;
@@ -1818,19 +1827,47 @@ body{
 }
 
 #introLogo{
-  width:220px;
+  width:200px;
   opacity:0;
   transform:scale(0.2);
   filter: drop-shadow(0 0 30px #00f0ff);
 }
 
-/* animation tab start hogi jab class lagegi */
 #introLogo.play{
-  animation: logoIn 3s ease forwards;
+  animation:logoIn 3s ease forwards;
 }
 
 @keyframes logoIn{
   0%{opacity:0; transform:scale(0.2);}
   60%{opacity:1; transform:scale(1.25);}
   100%{opacity:1; transform:scale(1);}
+}
+
+/* Particles canvas */
+#particles{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* logo above particles */
+#introLogo{
+  position:relative;
+  z-index:1;
+}
+
+/* FLOATING EFFECT */
+#introLogo.play{
+  animation:
+    logoIn 3s ease forwards,
+    float 2.8s ease-in-out 3s infinite;
+}
+
+/* Up–down floating */
+@keyframes float{
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-12px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
 }
