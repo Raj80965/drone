@@ -1808,21 +1808,25 @@ body{
 }
 
 #introOverlay{
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, #001a1f, #000);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999999;
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
 }
 
 #introLogo{
-  width: 220px;
-  opacity: 0;
-  transform: scale(0.2);
-  animation: logoIn 2.5s ease forwards;
-  filter: drop-shadow(0 0 35px #00f0ff);
+  width:220px;
+  opacity:0;
+  transform:scale(0.2);
+  filter: drop-shadow(0 0 30px #00f0ff);
+}
+
+/* animation tab start hogi jab class lagegi */
+#introLogo.play{
+  animation: logoIn 3s ease forwards;
 }
 
 @keyframes logoIn{
