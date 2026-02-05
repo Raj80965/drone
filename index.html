@@ -251,7 +251,7 @@
 
           <script src="script.js"></script>
 
-       <script>
+     <script>
 let started = false;
 
 document.addEventListener("pointerdown", () => {
@@ -260,14 +260,16 @@ document.addEventListener("pointerdown", () => {
 
   const sound = document.getElementById("introSound");
   const overlay = document.getElementById("introOverlay");
+  const logo = document.getElementById("introLogo");
 
-  // sound + logo ek sath
+  // 🔥 logo animation + sound ek sath
+  logo.classList.add("play");
   sound.currentTime = 0;
   sound.play().catch(()=>{});
 
-  // 3 sec baad auto band
+  // ⏱ 3 sec baad auto band
   setTimeout(()=>{
-    overlay.style.transition = "opacity 0.6s ease";
+    overlay.style.transition = "opacity .6s ease";
     overlay.style.opacity = "0";
   },2400);
 
