@@ -1801,3 +1801,60 @@ body {
   color: #7feeff;
   text-shadow: 0 0 6px rgba(0,242,255,0.6);
 }
+
+/* FULLSCREEN INTRO OVERLAY */
+body{
+  overflow-x: hidden;
+}
+
+#introOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #001a1f, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+/* LOGO ANIMATION */
+#introLogo{
+  width: 220px;
+  opacity: 0;
+  transform: scale(0.2);
+  animation: logoIn 2.5s ease forwards;
+  filter: drop-shadow(0 0 35px #00f0ff);
+}
+
+@keyframes logoIn{
+  0%{
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  60%{
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* TAP TEXT */
+.tapText{
+  margin-top: 18px;
+  font-size: 14px;
+  color: #9ff;
+  opacity: 0.7;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:0.3;}
+  50%{opacity:0.9;}
+}
