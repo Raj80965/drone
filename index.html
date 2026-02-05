@@ -7,10 +7,11 @@
         </head>
         <body>
  <!-- INTRO SCREEN -->
-         <div id="introOverlay">
+       <div id="introOverlay">
   <img src="logo.png" id="introLogo">
-  <audio id="introSound" src="drone.mp3.wav"></audio>
+  <audio id="introSound" src="drone.mp3.wav" preload="auto"></audio>
 </div>
+
 
                 
         <!-- NAVBAR -->
@@ -254,30 +255,32 @@
      <script>
 let started = false;
 
-document.addEventListener("pointerdown", () => {
+document.addEventListener("touchstart", startIntro, { once:true });
+document.addEventListener("click", startIntro, { once:true });
+
+function startIntro(){
   if(started) return;
   started = true;
 
   const sound = document.getElementById("introSound");
-  const overlay = document.getElementById("introOverlay");
-  const logo = document.getElementById("introLogo");
+  const logo  = document.getElementById("introLogo");
+  const over  = document.getElementById("introOverlay");
 
-  // 🔥 logo animation + sound ek sath
+  // animation + sound ek sath
   logo.classList.add("play");
   sound.currentTime = 0;
   sound.play().catch(()=>{});
 
-  // ⏱ 3 sec baad auto band
+  // 3 sec baad auto hide
   setTimeout(()=>{
-    overlay.style.transition = "opacity .6s ease";
-    overlay.style.opacity = "0";
+    over.style.transition="opacity .6s ease";
+    over.style.opacity="0";
   },2400);
 
   setTimeout(()=>{
-    overlay.style.display = "none";
+    over.style.display="none";
   },3000);
-
-},{ once:true });
+}
 </script>
 
 
