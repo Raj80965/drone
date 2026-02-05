@@ -6,14 +6,17 @@
           <link rel="stylesheet" href="futuristic.css">
         </head>
         <body>
- <!-- INTRO SCREEN -->
-       <div id="introOverlay">
-  <img src="logo.png" id="introLogo">
-  <audio id="introSound" src="drone.mp3.wav" preload="auto"></audio>
-</div>
+
+          <!-- INTRO SCREEN -->
+          <div id="introOverlay">
+            <canvas id="particles"></canvas>
+            <img src="image/logo/logo1.png" id="introLogo">
+            <audio id="introSound" src="drone.mp3.wav" preload="auto"></audio>
+          </div>
 
 
-                
+
+
         <!-- NAVBAR -->
         <nav class="navbar">
           <div class="nav-title">
@@ -252,38 +255,79 @@
 
           <script src="script.js"></script>
 
-     <script>
-let started = false;
+          
+          <script>
+          let started = false;
 
-document.addEventListener("touchstart", startIntro, { once:true });
-document.addEventListener("click", startIntro, { once:true });
+          document.addEventListener("touchstart", startIntro, { once:true });
+          document.addEventListener("click", startIntro, { once:true });
 
-function startIntro(){
-  if(started) return;
-  started = true;
+          function startIntro(){
+            if(started) return;
+            started = true;
 
-  const sound = document.getElementById("introSound");
-  const logo  = document.getElementById("introLogo");
-  const over  = document.getElementById("introOverlay");
+            const sound = document.getElementById("introSound");
+            const logo  = document.getElementById("introLogo");
+            const over  = document.getElementById("introOverlay");
 
-  // animation + sound ek sath
-  logo.classList.add("play");
-  sound.currentTime = 0;
-  sound.play().catch(()=>{});
+            // animation + sound ek sath
+            logo.classList.add("play");
+            sound.currentTime = 0;
+            sound.play().catch(()=>{});
 
-  // 3 sec baad auto hide
-  setTimeout(()=>{
-    over.style.transition="opacity .6s ease";
-    over.style.opacity="0";
-  },2400);
+            // 3 sec baad auto hide
+            setTimeout(()=>{
+              over.style.transition="opacity .6s ease";
+              over.style.opacity="0";
+            },2400);
 
-  setTimeout(()=>{
-    over.style.display="none";
-  },3000);
-}
-</script>
+            setTimeout(()=>{
+              over.style.display="none";
+            },4000);
+          }
+          </script>
+
+          <script>
+          /* SIMPLE PARTICLES (mobile-safe) */
+          const canvas = document.getElementById("particles");
+          const ctx = canvas.getContext("2d");
+          let w, h, particles;
+
+          function resize(){
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+          }
+          window.addEventListener("resize", resize);
+          resize();
+
+          const COUNT = Math.min(70, Math.floor(w/10));
+          particles = Array.from({length: COUNT}, () => ({
+            x: Math.random()*w,
+            y: Math.random()*h,
+            r: Math.random()*1.8 + 0.6,
+            vx: (Math.random()-0.5)*0.6,
+            vy: (Math.random()-0.5)*0.6
+          }));
+
+          function draw(){
+            ctx.clearRect(0,0,w,h);
+            ctx.fillStyle = "#00f0ff";
+            for(const p of particles){
+              p.x += p.vx; p.y += p.vy;
+              if(p.x<0||p.x>w) p.vx*=-1;
+              if(p.y<0||p.y>h) p.vy*=-1;
+
+              ctx.beginPath();
+              ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+              ctx.fill();
+            }
+            requestAnimationFrame(draw);
+          }
+          draw();
+          </script>
 
 
 
+          
         </body>
         </html>
