@@ -910,15 +910,30 @@
 
 
     <script>
-      const sound = document.getElementById("clickSound");
+const clickSound = document.getElementById("clickSound");
+let canPlay = true;
 
-      document.querySelectorAll("a, button, .menu-icon").forEach(item => {
-        item.addEventListener("click", () => {
-          sound.currentTime = 0;
-          sound.play();
-        });
-      });
-    </script>
+function playClickSound() {
+  if (!canPlay) return;
+
+  canPlay = false;
+  clickSound.currentTime = 0;
+  clickSound.play().catch(()=>{});
+
+  // 300ms lock (double fire block)
+  setTimeout(() => {
+    canPlay = true;
+  }, 300);
+}
+
+// 🔥 USE POINTER EVENTS (BEST for mobile)
+document.addEventListener("pointerdown", (e) => {
+  const el = e.target.closest("a, button, summary, .menu-icon");
+  if (el) {
+    playClickSound();
+  }
+});
+</script>
 
 
     <script src="script.js"></script>
