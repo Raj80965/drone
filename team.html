@@ -886,54 +886,31 @@
 
     <audio id="uiSound" src="click.mp3" preload="auto"></audio>
 
-    <script>
-      const uiSound = document.getElementById("uiSound");
+   
 
-      function playSound(){
-        if(!uiSound) return;
-        uiSound.currentTime = 0;
-        uiSound.play().catch(()=>{});
-      }
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
-      /* 🔥 ALL SUMMARY (accordion buttons) */
-      document.querySelectorAll("summary").forEach(item=>{
-        item.addEventListener("click", playSound);
-        item.addEventListener("touchstart", playSound); // 📱 mobile fix
-      });
-
-      /* 🔥 plus icon / menu / normal buttons */
-      document.querySelectorAll("a, button, .menu-icon").forEach(item=>{
-        item.addEventListener("click", playSound);
-        item.addEventListener("touchstart", playSound);
-      });
-    </script>
-
-
-    <script>
+<script>
 const clickSound = document.getElementById("clickSound");
-let canPlay = true;
+let soundLock = false;
 
-function playClickSound() {
-  if (!canPlay) return;
+document.addEventListener("pointerdown", (e) => {
+  const target = e.target.closest("a, button, summary, .menu-icon");
+  if (!target) return;
 
-  canPlay = false;
+  if (soundLock) return;
+  soundLock = true;
+
   clickSound.currentTime = 0;
   clickSound.play().catch(()=>{});
 
-  // 300ms lock (double fire block)
   setTimeout(() => {
-    canPlay = true;
-  }, 300);
-}
-
-// 🔥 USE POINTER EVENTS (BEST for mobile)
-document.addEventListener("pointerdown", (e) => {
-  const el = e.target.closest("a, button, summary, .menu-icon");
-  if (el) {
-    playClickSound();
-  }
+    soundLock = false;
+  }, 250); // 👈 debounce
 });
 </script>
+
+   
 
 
     <script src="script.js"></script>
