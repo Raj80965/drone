@@ -1816,30 +1816,41 @@ body {
 body{
   overflow-x: hidden;
 }
+/* ===== INTRO OVERLAY ===== */
 #introOverlay{
-  position:fixed;
-  inset:0;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:999999;
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; 
+  align-items: center;
 }
 
+/* Drone canvas full screen */
+#droneCanvas{
+  position: absolute;
+  inset: 0;
+}
+
+/* Logo center me */
 #introLogo{
-  width:200px;
-  opacity:0;
-  transform:scale(0.2);
-  filter: drop-shadow(0 0 30px #00f0ff);
+  width: 180px;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.3);
+  filter: drop-shadow(0 0 25px #00f2ff);
 }
 
+/* Logo animation */
 #introLogo.play{
-  animation:logoIn 3s ease forwards;
+  animation: logoIn 3s ease forwards;
 }
 
 @keyframes logoIn{
-  0%{opacity:0; transform:scale(0.2);}
-  60%{opacity:1; transform:scale(1.25);}
+  0%{opacity:0; transform:scale(0.3);}
+  60%{opacity:1; transform:scale(1.2);}
   100%{opacity:1; transform:scale(1);}
 }
 
@@ -1870,4 +1881,42 @@ body{
   0%   { transform: translateY(0) scale(1); }
   50%  { transform: translateY(-12px) scale(1.01); }
   100% { transform: translateY(0) scale(1); }
+}
+
+#robotParticles{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at center,
+      rgba(0,242,255,0.15),
+      transparent 60%);
+  animation: radar 6s linear infinite;
+  z-index:-2;
+}
+
+@keyframes radar{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+#droneCanvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  z-index: 1;
+}
+
+#introLogo{
+  position: relative;
+  z-index: 2;
 }
