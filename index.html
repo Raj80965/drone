@@ -548,7 +548,49 @@ function animateBG(){
 animateBG();
 </script>
 
+<script>
+const bg = document.getElementById("bgCanvas");
+const bctx = bg.getContext("2d");
 
+function resizeBG(){
+  bg.width = innerWidth;
+  bg.height = innerHeight;
+}
+resizeBG();
+window.addEventListener("resize", resizeBG);
+
+const dots = [];
+
+for(let i=0;i<120;i++){
+  dots.push({
+    x: Math.random()*bg.width,
+    y: Math.random()*bg.height,
+    r: Math.random()*2+0.5,
+    v: Math.random()*0.4+0.1
+  });
+}
+
+function animateBG(){
+  bctx.clearRect(0,0,bg.width,bg.height);
+
+  dots.forEach(d=>{
+    d.y += d.v;
+    if(d.y > bg.height){
+      d.y = -5;
+      d.x = Math.random()*bg.width;
+    }
+
+    bctx.beginPath();
+    bctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    bctx.fillStyle="rgba(0,242,255,0.6)";
+    bctx.fill();
+  });
+
+  requestAnimationFrame(animateBG);
+}
+
+animateBG();
+</script>
           
         </body>
         </html>
