@@ -1939,3 +1939,57 @@ body::before{
   position: relative;
   z-index: 3;
 }
+
+/* ===== MOBILE RESPONSIVE FIX ===== */
+@media (max-width:768px){
+
+  .navbar{
+    padding:12px 20px;
+  }
+
+  /* hide menu links */
+  .nav-menu{
+    position: fixed;
+    top: 64px;
+    right: 16px;
+    width: 220px;
+
+    background:#031622;
+    border:1px solid rgba(0,242,255,0.5);
+    border-radius:14px;
+
+    display:none;
+    flex-direction:column;
+    gap:12px;
+    padding:16px;
+
+    z-index:9999;
+  }
+
+  .nav-menu.show{
+    display:flex;
+  }
+
+  /* show 3-dot icon */
+  .menu-icon{
+    display:block;
+    font-size:28px;
+  }
+
+  .nav-menu a{
+    font-size:16px;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .intro{
+    font-size:15px;
+  }
+
+  .ad-grid{
+    grid-template-columns:1fr;
+  }
+}
+
