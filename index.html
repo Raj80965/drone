@@ -551,11 +551,13 @@ function animateBG(){
 animateBG();
 </script>
 
-                <script>
-if(window.innerWidth < 768){
-  document.getElementById("droneCanvas").style.display="none";
+        <script>
+if (window.innerWidth < 768) {
+  const canvas = document.getElementById("droneCanvas");
+  if (canvas) canvas.style.display = "none";
 }
 </script>
+
 
 
 <script>
