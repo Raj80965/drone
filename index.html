@@ -551,6 +551,13 @@ function animateBG(){
 animateBG();
 </script>
 
+                <script>
+if(window.innerWidth < 768){
+  document.getElementById("droneCanvas").style.display="none";
+}
+</script>
+
+
 <script>
 function toggleMenu(){
   document.getElementById("navMenu").classList.toggle("show");
