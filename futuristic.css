@@ -180,11 +180,11 @@ body{
 
 /* ================= CARDS ================= */
 .ad-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:35px;
-  max-width:1100px;
-  margin:auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 boxes per row */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto;
 }
 
 .ad-card{
@@ -1910,6 +1910,8 @@ body::before{
   position: absolute;
   top: 0;
   left: 0;
+  inset: 0;
+
   width: 100vw;
   height: 100vh;
   background: transparent;
@@ -1932,12 +1934,12 @@ body::before{
 #droneCanvas{
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
 }
 
 #introLogo{
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 
 /* ===== MOBILE RESPONSIVE FIX ===== */
@@ -1992,4 +1994,6 @@ body::before{
     grid-template-columns:1fr;
   }
 }
-
+#dynamicEvents{
+  display: contents;
+}
