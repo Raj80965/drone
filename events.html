@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Events - Drone and Robotics Club</title>
   <link rel="stylesheet" href="futuristic.css">
 </head>
@@ -13,7 +10,7 @@
   <!-- NAVBAR -->
   <div class="navbar">
     <div class="nav-title">
-      <img src="logo1.png" alt="Club Logo" class="logo">
+      <img src="logo.png" alt="Club Logo" class="logo">
       <span>Drone and Robotics Club</span>
     </div>
 
@@ -41,40 +38,47 @@
 
     <h2 class="section-title">Our Events</h2>
 
+<!-- ADMIN PANEL START -->
+<div style="text-align:center; margin-bottom:30px;">
+  <input type="password" id="adminPass" placeholder="Admin Password">
+  <button onclick="checkPassword()">Login</button>
+</div>
+
+<div id="adminForm" style="display:none; text-align:center; margin-bottom:30px;">
+  <h3>Update Event</h3>
+  <input type="text" id="title" placeholder="Event Title"><br><br>
+  <input type="date" id="date"><br><br>
+  <textarea id="desc" placeholder="Event Description"></textarea><br><br>
+  <br>
+<input type="text" id="link" placeholder="Registration Link (e.g. register.html)">
+<br><br>
+<input type="file" id="imageFile" accept="image/*">
+<br><br><br><br>
+  <button onclick="saveEvent()">Save Event</button>
+</div>
+<!-- ADMIN PANEL END -->
+
     <div class="ad-grid">
 
-      <!-- EVENT 1 -->
-      <div class="ad-card">
-        <img src="image/events/line-following-workshop/workshop1.jpg" alt="Line Following Robot Workshop" class="event-img">
+  <!-- 🔥 Dynamic events yaha add honge -->
+  <div id="dynamicEvents"></div>
 
-        <h3>Line Following Robot Workshop</h3>
-        <p>Date: 27 December 2025</p>
-
-        <p>
-          Our first workshop on Line Following Robot where students learned
+  <!-- STATIC EVENT -->
+  <div class="ad-card">
+    <img src="image/events/line-following-workshop/workshop1.jpg" class="event-img">
+    <h3>Line Following Robot Workshop</h3>
+    <p>Date: 27 December 2025</p>
+    <p>   Our first workshop on Line Following Robot where students learned
           robotics basics, sensors and hands-on robot building.
-        </p>
-      </div>
+       </p>
+  </div>
+
+</div>
+      
 
 
       <!-- FUTURE EVENTS (example placeholders) -->
-      <div class="ad-card">
-        <div class="ad-icon">🔧</div>
-        <h3>Robotics Bootcamp</h3>
-        <p>Coming Soon</p>
-        <p>
-          Hands-on training on Arduino, sensors and robotics projects.
-        </p>
-      </div>
-
-      <div class="ad-card">
-        <div class="ad-icon">🚁</div>
-        <h3>Drone Workshop</h3>
-        <p>Coming Soon</p>
-        <p>
-          Introduction to drone components, flight control and safety.
-        </p>
-      </div>
+     
 
     </div>
   </div>
@@ -88,7 +92,7 @@
       <img src="image/team-photo/iste.png" alt="ISTE">
       <img src="image/team-photo/iic.png" alt="Institution Innovation Council">
       <img src="image/team-photo/sistec.png" alt="SISTec College">
-       <img src="logo1.png" alt="Drone and Robotics Club">
+       <img src="logo.png" alt="Drone and Robotics Club">
     </div>
   </div>
   
@@ -111,25 +115,102 @@
 
   <audio id="clickSound" src="click.mp3"></audio>
 
-  <script>
-    const sound = document.getElementById("clickSound");
+ <script>
 
-    document.querySelectorAll("a, button, .menu-icon").forEach(item => {
-      item.addEventListener("click", () => {
-        sound.currentTime = 0;
-        sound.play();
-      });
-    });
-  </script>
+let isAdmin = false;
 
+function checkPassword(){
+  const pass = document.getElementById("adminPass").value;
 
-  <script src="script.js"></script>
-
-  <script>
-function toggleMenu(){
-  document.getElementById("navMenu").classList.toggle("show");
+  if(pass === "Raj"){
+    isAdmin = true;
+    document.getElementById("adminForm").style.display = "block";
+    loadEvents();
+  } else {
+    alert("Wrong Password");
+  }
 }
+
+function saveEvent(){
+  const title = document.getElementById("title").value.trim();
+  const date = document.getElementById("date").value;
+  const desc = document.getElementById("desc").value.trim();
+  const link = document.getElementById("link").value.trim();
+  const file = document.getElementById("imageFile").files[0];
+
+  if(!title || !date || !desc){
+    alert("Please fill required fields");
+    return;
+  }
+
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+
+  function addEvent(imageData=""){
+    const newEvent = { title, date, desc, link, image: imageData };
+    events.push(newEvent);
+    localStorage.setItem("clubEvents", JSON.stringify(events));
+    loadEvents();   // 🔥 direct refresh without reload
+    alert("Event Added Successfully!");
+
+    // form clear
+    document.getElementById("title").value="";
+    document.getElementById("date").value="";
+    document.getElementById("desc").value="";
+    document.getElementById("link").value="";
+    document.getElementById("imageFile").value="";
+  }
+
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      addEvent(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    addEvent();
+  }
+}
+
+function deleteEvent(index){
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  events.splice(index, 1);
+  localStorage.setItem("clubEvents", JSON.stringify(events));
+  loadEvents();
+}
+
+function loadEvents(){
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  const container = document.getElementById("dynamicEvents");
+
+  container.innerHTML = "";
+
+  events.forEach((event, index) => {
+
+    const card = document.createElement("div");
+    card.classList.add("ad-card");
+
+    let deleteBtn = "";
+    if(isAdmin){
+      deleteBtn = `<br><br><button onclick="deleteEvent(${index})">Delete</button>`;
+    }
+
+    card.innerHTML = `
+      ${event.image ? `<img src="${event.image}" class="event-img">` : ""}
+      <h3>${event.title}</h3>
+      <p>Date: ${event.date}</p>
+      <p>${event.desc}</p>
+      ${event.link ? `<a href="${event.link}">Register Now</a>` : ""}
+      ${deleteBtn}
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+loadEvents();
+
 </script>
 
+  <script src="script.js"></script>
 </body>
 </html>
