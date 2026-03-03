@@ -1997,3 +1997,30 @@ body::before{
 #dynamicEvents{
   display: contents;
 }
+
+/* FIX dynamic events grid */
+#dynamicEvents{
+  display: contents;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px){
+
+  .ad-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  .section{
+    padding: 20px 15px;
+  }
+
+  .ad-card{
+    padding: 20px;
+  }
+
+  .event-img{
+    height: 180px;
+    object-fit: cover;
+  }
+
+}
