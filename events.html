@@ -183,31 +183,39 @@ function deleteEvent(index){
 }
 
 function loadEvents(){
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
-  const container = document.getElementById("dynamicEvents");
+  fetch("http://localhost:5000/events")
+    .then(res => res.json())
+    .then(events => {
 
-  container.innerHTML = "";
+      const container = document.getElementById("dynamicEvents");
+      container.innerHTML = "";
 
-  events.forEach((event, index) => {
+      events.forEach((event) => {
 
-    const card = document.createElement("div");
-    card.classList.add("ad-card");
+        const card = document.createElement("div");
+        card.classList.add("ad-card");
 
-    let deleteBtn = "";
-    if(isAdmin){
-      deleteBtn = `<br><br><button onclick="deleteEvent(${index})">Delete</button>`;
-    }
+        card.innerHTML = `
+          <h3>${event.title}</h3>
+          <p>Date: ${event.date}</p>
+          <p>${event.desc}</p>
+          <button onclick="deleteEvent('${event._id}')">Delete</button>
+        `;
 
-    card.innerHTML = `
-      ${event.image ? `<img src="${event.image}" class="event-img">` : ""}
-      <h3>${event.title}</h3>
-      <p>Date: ${event.date}</p>
-      <p>${event.desc}</p>
-      ${event.link ? `<a href="${event.link}">Register Now</a>` : ""}
-      ${deleteBtn}
-    `;
+        container.appendChild(card);
+      });
 
-    container.appendChild(card);
+    });
+}
+
+function deleteEvent(id){
+  fetch("http://localhost:5000/delete-event/" + id, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Event Deleted");
+    loadEvents();
   });
 }
 
