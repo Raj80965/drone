@@ -1167,7 +1167,6 @@ body {
   padding:0;
   border-radius:0;
 
-  /* 🔥 better visibility */
   filter:
     brightness(1.15)
     contrast(1.1)
