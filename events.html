@@ -2,18 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>About Us - Drone and Robotics Club</title>
+  <title>Events - Drone and Robotics Club</title>
   <link rel="stylesheet" href="futuristic.css">
-   <!-- FONT AWESOME FOR SOCIAL ICONS -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  </head>
+</head>
 <body>
 
-  <!-- NAVBAR (same as home) -->
+  <!-- NAVBAR -->
   <div class="navbar">
     <div class="nav-title">
       <img src="logo1.png" alt="Club Logo" class="logo">
@@ -25,11 +20,13 @@
 
       <!-- menu links -->
       <div class="nav-menu" id="navMenu">
-        <a href="index.html">Home</a>
+
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="team.html">Team</a>
       <a href="projects.html">Projects</a>
-      <a href="events.html">Events</a>
+        <a href="events.html">Events</a>
+
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
         <a href="guests.html">Guest Speakers</a>
@@ -92,7 +89,7 @@
   <div class="funding">
     <h2>🤝 Our Funding & Support Partners</h2>
 
-     <div class="funding-logos">
+    <div class="funding-logos">
       <img src="image/team-photo/iste.png" alt="ISTE">
       <img src="image/team-photo/iic.png" alt="Institution Innovation Council">
       <img src="image/team-photo/sistec.png" alt="SISTec College">
@@ -119,11 +116,9 @@
 
   <audio id="clickSound" src="click.mp3"></audio>
 
-<script>
+ <script>
 
 let isAdmin = false;
-
-const API_URL = "https://robo-backend-6u7n.onrender.com";
 
 function checkPassword(){
   const pass = document.getElementById("adminPass").value;
@@ -131,78 +126,85 @@ function checkPassword(){
   if(pass === "Raj"){
     isAdmin = true;
     document.getElementById("adminForm").style.display = "block";
+    loadEvents();
   } else {
     alert("Wrong Password");
   }
 }
 
 function saveEvent(){
-
   const title = document.getElementById("title").value.trim();
   const date = document.getElementById("date").value;
   const desc = document.getElementById("desc").value.trim();
   const link = document.getElementById("link").value.trim();
+  const file = document.getElementById("imageFile").files[0];
 
   if(!title || !date || !desc){
     alert("Please fill required fields");
     return;
   }
 
-  fetch(API_URL + "/add-event", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title,
-      date,
-      desc,
-      link,
-      image: ""
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("Event Added Successfully");
-    loadEvents();
-  });
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
 
+  function addEvent(imageData=""){
+    const newEvent = { title, date, desc, link, image: imageData };
+    events.push(newEvent);
+    localStorage.setItem("clubEvents", JSON.stringify(events));
+    loadEvents();   // 🔥 direct refresh without reload
+    alert("Event Added Successfully!");
+
+    // form clear
+    document.getElementById("title").value="";
+    document.getElementById("date").value="";
+    document.getElementById("desc").value="";
+    document.getElementById("link").value="";
+    document.getElementById("imageFile").value="";
+  }
+
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      addEvent(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    addEvent();
+  }
+}
+
+function deleteEvent(index){
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  events.splice(index, 1);
+  localStorage.setItem("clubEvents", JSON.stringify(events));
+  loadEvents();
 }
 
 function loadEvents(){
-  fetch(API_URL + "/events")
-    .then(res => res.json())
-    .then(events => {
+  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  const container = document.getElementById("dynamicEvents");
 
-      const container = document.getElementById("dynamicEvents");
-      container.innerHTML = "";
+  container.innerHTML = "";
 
-      events.forEach((event) => {
+  events.forEach((event, index) => {
 
-        const card = document.createElement("div");
-        card.classList.add("ad-card");
+    const card = document.createElement("div");
+    card.classList.add("ad-card");
 
-        card.innerHTML = `
-          <h3>${event.title}</h3>
-          <p>Date: ${event.date}</p>
-          <p>${event.desc}</p>
-          <button onclick="deleteEvent('${event._id}')">Delete</button>
-        `;
+    let deleteBtn = "";
+    if(isAdmin){
+      deleteBtn = `<br><br><button onclick="deleteEvent(${index})">Delete</button>`;
+    }
 
-        container.appendChild(card);
-      });
+    card.innerHTML = `
+      ${event.image ? `<img src="${event.image}" class="event-img">` : ""}
+      <h3>${event.title}</h3>
+      <p>Date: ${event.date}</p>
+      <p>${event.desc}</p>
+      ${event.link ? `<a href="${event.link}">Register Now</a>` : ""}
+      ${deleteBtn}
+    `;
 
-    });
-}
-
-function deleteEvent(id){
-  fetch(API_URL + "/delete-event/" + id, {
-    method: "DELETE"
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("Event Deleted");
-    loadEvents();
+    container.appendChild(card);
   });
 }
 
