@@ -119,8 +119,6 @@
 
   <audio id="clickSound" src="click.mp3"></audio>
 
- <script>
-
 let isAdmin = false;
 
 function checkPassword(){
@@ -129,57 +127,42 @@ function checkPassword(){
   if(pass === "Raj"){
     isAdmin = true;
     document.getElementById("adminForm").style.display = "block";
-    loadEvents();
   } else {
     alert("Wrong Password");
   }
 }
 
 function saveEvent(){
+
   const title = document.getElementById("title").value.trim();
   const date = document.getElementById("date").value;
   const desc = document.getElementById("desc").value.trim();
   const link = document.getElementById("link").value.trim();
-  const file = document.getElementById("imageFile").files[0];
 
   if(!title || !date || !desc){
     alert("Please fill required fields");
     return;
   }
 
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  fetch("http://localhost:5000/add-event", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title,
+      date,
+      desc,
+      link,
+      image: ""
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Event Added Successfully");
+    loadEvents();
+  });
 
-  function addEvent(imageData=""){
-    const newEvent = { title, date, desc, link, image: imageData };
-    events.push(newEvent);
-    localStorage.setItem("clubEvents", JSON.stringify(events));
-    loadEvents();   // 🔥 direct refresh without reload
-    alert("Event Added Successfully!");
-
-    // form clear
-    document.getElementById("title").value="";
-    document.getElementById("date").value="";
-    document.getElementById("desc").value="";
-    document.getElementById("link").value="";
-    document.getElementById("imageFile").value="";
-  }
-
-  if(file){
-    const reader = new FileReader();
-    reader.onload = function(e){
-      addEvent(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    addEvent();
-  }
-}
-
-function deleteEvent(index){
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
-  events.splice(index, 1);
-  localStorage.setItem("clubEvents", JSON.stringify(events));
-  loadEvents();
 }
 
 function loadEvents(){
@@ -220,8 +203,6 @@ function deleteEvent(id){
 }
 
 loadEvents();
-
-</script>
 
   <script src="script.js"></script>
 </body>
