@@ -116,96 +116,90 @@
 
   <audio id="clickSound" src="click.mp3"></audio>
 
- <script>
+ <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAzdksTHd2rZa0Dbytz0GrtiXUqEx8305o",
+  authDomain: "dronex-robo.firebaseapp.com",
+  projectId: "dronex-robo",
+  storageBucket: "dronex-robo.firebasestorage.app",
+  messagingSenderId: "486905926771",
+  appId: "1:486905926771:web:5c7a6f3fb05002a122c606"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 let isAdmin = false;
 
-function checkPassword(){
+window.checkPassword = function(){
   const pass = document.getElementById("adminPass").value;
-
   if(pass === "Raj"){
     isAdmin = true;
     document.getElementById("adminForm").style.display = "block";
-    loadEvents();
   } else {
     alert("Wrong Password");
   }
 }
 
-function saveEvent(){
+window.saveEvent = async function(){
   const title = document.getElementById("title").value.trim();
   const date = document.getElementById("date").value;
   const desc = document.getElementById("desc").value.trim();
   const link = document.getElementById("link").value.trim();
-  const file = document.getElementById("imageFile").files[0];
 
   if(!title || !date || !desc){
-    alert("Please fill required fields");
+    alert("Fill required fields");
     return;
   }
 
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
+  await addDoc(collection(db, "events"), {
+    title,
+    date,
+    desc,
+    link
+  });
 
-  function addEvent(imageData=""){
-    const newEvent = { title, date, desc, link, image: imageData };
-    events.push(newEvent);
-    localStorage.setItem("clubEvents", JSON.stringify(events));
-    loadEvents();   // 🔥 direct refresh without reload
-    alert("Event Added Successfully!");
-
-    // form clear
-    document.getElementById("title").value="";
-    document.getElementById("date").value="";
-    document.getElementById("desc").value="";
-    document.getElementById("link").value="";
-    document.getElementById("imageFile").value="";
-  }
-
-  if(file){
-    const reader = new FileReader();
-    reader.onload = function(e){
-      addEvent(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    addEvent();
-  }
-}
-
-function deleteEvent(index){
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
-  events.splice(index, 1);
-  localStorage.setItem("clubEvents", JSON.stringify(events));
-  loadEvents();
+  alert("Event Added!");
 }
 
 function loadEvents(){
-  let events = JSON.parse(localStorage.getItem("clubEvents")) || [];
   const container = document.getElementById("dynamicEvents");
 
-  container.innerHTML = "";
+  onSnapshot(collection(db, "events"), (snapshot) => {
+    container.innerHTML = "";
 
-  events.forEach((event, index) => {
+    snapshot.forEach((docSnap) => {
+      const event = docSnap.data();
+      const id = docSnap.id;
 
-    const card = document.createElement("div");
-    card.classList.add("ad-card");
+      const card = document.createElement("div");
+      card.classList.add("ad-card");
 
-    let deleteBtn = "";
-    if(isAdmin){
-      deleteBtn = `<br><br><button onclick="deleteEvent(${index})">Delete</button>`;
-    }
+      let deleteBtn = "";
+      if(isAdmin){
+        deleteBtn = `<br><br><button onclick="deleteEvent('${id}')">Delete</button>`;
+      }
 
-    card.innerHTML = `
-      ${event.image ? `<img src="${event.image}" class="event-img">` : ""}
-      <h3>${event.title}</h3>
-      <p>Date: ${event.date}</p>
-      <p>${event.desc}</p>
-      ${event.link ? `<a href="${event.link}">Register Now</a>` : ""}
-      ${deleteBtn}
-    `;
+      card.innerHTML = `
+        <h3>${event.title}</h3>
+        <p>Date: ${event.date}</p>
+        <p>${event.desc}</p>
+        ${event.link ? `<a href="${event.link}">Register Now</a>` : ""}
+        ${deleteBtn}
+      `;
 
-    container.appendChild(card);
+      container.appendChild(card);
+    });
   });
+}
+
+window.deleteEvent = async function(id){
+  await deleteDoc(doc(db, "events", id));
 }
 
 loadEvents();
