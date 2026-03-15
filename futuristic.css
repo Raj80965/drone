@@ -1169,13 +1169,13 @@ body {
     border-radius:10px;
 };
 
-  filter:
+  filter:{
     brightness(1.15)
     contrast(1.1)
     drop-shadow(0 0 14px rgba(0,255,231,0.45));
 
   transition:transform 0.3s ease, filter 0.3s ease;
-}
+};
 
 .funding-logos img:hover{
   transform:scale(1.08);
