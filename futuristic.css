@@ -226,6 +226,38 @@ body{
   opacity:0.75;
 }
 
+.social-links {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: #00f2ff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid rgba(0, 242, 255, 0.3);
+  border-radius: 30px;
+  background: rgba(0, 242, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: rgba(0, 242, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 242, 255, 0.8);
+}
+
 /* ===== IMPROVED ABOUT PAGE ===== */
 
 .about{
